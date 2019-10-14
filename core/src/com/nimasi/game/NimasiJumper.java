@@ -11,6 +11,9 @@ import com.nimasi.game.world.GameMap;
 import com.nimasi.game.world.TileType;
 import com.nimasi.game.world.TiledGameMap;
 
+/**
+ * NimasiJumper Core Application
+ */
 public class NimasiJumper extends ApplicationAdapter {
 
     OrthographicCamera cam;
@@ -19,10 +22,10 @@ public class NimasiJumper extends ApplicationAdapter {
 
     GameMap gameMap;
 
-	/**
-	 * Creates game window.
-	 */
-	@Override
+    /**
+     * Creates game window.
+     */
+    @Override
     public void create() {
         batch = new SpriteBatch();
         img = new Texture("badlogic.jpg");
@@ -34,10 +37,10 @@ public class NimasiJumper extends ApplicationAdapter {
         gameMap = new TiledGameMap();
     }
 
-	/**
-	 * Nimasi game renderer
-	 */
-	@Override
+    /**
+     * Nimasi game renderer
+     */
+    @Override
     public void render() {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -60,10 +63,10 @@ public class NimasiJumper extends ApplicationAdapter {
         gameMap.render(cam);
     }
 
-	/**
-	 * Closes Nimasi
-	 */
-	@Override
+    /**
+     * Closes Nimasi
+     */
+    @Override
     public void dispose() {
         batch.dispose();
         img.dispose();

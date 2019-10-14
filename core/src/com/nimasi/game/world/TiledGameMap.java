@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
+/**
+ * Sets up game map for NimasiJumper
+ */
 public class TiledGameMap extends GameMap {
 
     TiledMap tiledMap;
@@ -19,6 +22,7 @@ public class TiledGameMap extends GameMap {
 
     /**
      * Map rendering with set view.
+     *
      * @param camera: View of the game
      */
     @Override
@@ -29,8 +33,9 @@ public class TiledGameMap extends GameMap {
     }
 
     /**
-     * Updates the map (maybe deletable)
-     * @param delta
+     * Updates the map
+     *
+     * @param delta: What to update
      */
     @Override
     public void update(float delta) {
