@@ -1,19 +1,26 @@
 package com.nimasi.game.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
-public class TiledGameMap extends GameMap{
+public class TiledGameMap extends GameMap {
 
     TiledMap tiledMap;
     OrthogonalTiledMapRenderer tiledMapRenderer;
 
-    public TiledGameMap () {
+    /**
+     * Sets map from tiled file.
+     */
+    public TiledGameMap() {
         tiledMap = new TmxMapLoader().load("map.tmx");
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
     }
 
+    /**
+     * Map rendering with set view.
+     * @param camera: View of the game
+     */
     @Override
     public void render(OrthographicCamera camera) {
         tiledMapRenderer.setView(camera);
@@ -21,11 +28,18 @@ public class TiledGameMap extends GameMap{
 
     }
 
+    /**
+     * Updates the map (maybe deletable)
+     * @param delta
+     */
     @Override
     public void update(float delta) {
 
     }
 
+    /**
+     * Disposes tiled map
+     */
     @Override
     public void dispose() {
         tiledMap.dispose();
@@ -35,28 +49,53 @@ public class TiledGameMap extends GameMap{
     /**
      * Gets a tile at its coordinate within the map at a specified layer.
      *
-     * @param layer
-     * @param col
-     * @param row
-     * @return
+     * @param layer: Layer on map
+     * @param col:   Col on map
+     * @param row:   Row on map
+     * @return string: Tile type
      */
     @Override
     public TileType getTileTypeByCoordinate(int layer, int col, int row) {
+        TiledMapTileLayer.Cell cell = ((TiledMapTileLayer) tiledMap.getLayers().get(layer)).getCell(col, row);
+
+        if (cell != null) {
+            TiledMapTile tile = cell.getTile();
+
+            if (tile != null) {
+                int id = tile.getId();
+                return TileType.getTileTypeByID(id);
+            }
+        }
         return null;
     }
 
+    /**
+     * Gets width of the layer
+     *
+     * @return int: Width of layer
+     */
     @Override
     public int getWidth() {
-        return 0;
+        return ((TiledMapTileLayer) tiledMap.getLayers().get(0)).getWidth();
     }
 
+    /**
+     * Gets height of the layer
+     *
+     * @return int: Height of layer
+     */
     @Override
     public int getHeight() {
-        return 0;
+        return ((TiledMapTileLayer) tiledMap.getLayers().get(0)).getHeight();
     }
 
+    /**
+     * Gets amount of layers in map
+     *
+     * @return int: Amount of layers
+     */
     @Override
     public int getLayers() {
-        return 0;
+        return tiledMap.getLayers().getCount();
     }
 }

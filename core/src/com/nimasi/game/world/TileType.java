@@ -1,5 +1,7 @@
 package com.nimasi.game.world;
 
+import java.util.HashMap;
+
 public enum TileType {
 
     GRASS(1, true, "Grass"),
@@ -16,11 +18,11 @@ public enum TileType {
     private String name;
     private float damage;
 
-    private TileType (int id, boolean collidable, String name) {
+    private TileType(int id, boolean collidable, String name) {
         this(id, collidable, name, 0);
     }
 
-    private TileType (int id, boolean collidable, String name, float damage) {
+    private TileType(int id, boolean collidable, String name, float damage) {
         this.id = id;
         this.collidable = collidable;
         this.name = name;
@@ -45,13 +47,19 @@ public enum TileType {
 
     private static HashMap<Integer, TileType> tileMap;
 
-    static  {
+    static {
+        tileMap = new HashMap<Integer, TileType>();
         for (TileType tileType : TileType.values()) {
             tileMap.put(tileType.getId(), tileType);
         }
     }
 
-    public static TileType getTileTypeByID (int id) {
+    /**
+     * Gets tile type.
+     * @param int id: Tile id
+     * @return str: Tile type
+     */
+    public static TileType getTileTypeByID(int id) {
         return tileMap.get(id);
     }
 
