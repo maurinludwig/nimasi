@@ -25,14 +25,12 @@ public abstract class Entity {
         newY += this.velocityY * deltaTime;
 
         if (map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight())) {
-            System.out.println("collides");
             if (velocityY < 0) {
                 this.pos.y = (float) Math.floor(pos.y);
                 grounded = true;
             }
             this.velocityY = 0;
         } else {
-            System.out.println("not collides");
             this.pos.y = newY;
             grounded = false;
         }

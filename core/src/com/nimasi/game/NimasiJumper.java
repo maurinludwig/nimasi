@@ -56,6 +56,7 @@ public class NimasiJumper extends ApplicationAdapter {
             }
         }
 
+        gameMap.update(Gdx.graphics.getDeltaTime());
         gameMap.render(cam, batch);
     }
 
