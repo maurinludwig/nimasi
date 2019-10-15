@@ -1,6 +1,7 @@
-package com.nimasi.game.world;
+package com.nimasi.game.play.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 
@@ -26,10 +27,14 @@ public class TiledGameMap extends GameMap {
      * @param camera: View of the game
      */
     @Override
-    public void render(OrthographicCamera camera) {
+    public void render(OrthographicCamera camera, SpriteBatch batch) {
         tiledMapRenderer.setView(camera);
         tiledMapRenderer.render();
 
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        super.render(camera, batch);
+        batch.end();
     }
 
     /**
@@ -39,7 +44,7 @@ public class TiledGameMap extends GameMap {
      */
     @Override
     public void update(float delta) {
-
+        super.update(delta);
     }
 
     /**

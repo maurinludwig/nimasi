@@ -4,21 +4,19 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.nimasi.game.world.GameMap;
-import com.nimasi.game.world.TileType;
-import com.nimasi.game.world.TiledGameMap;
+import com.nimasi.game.play.world.GameMap;
+import com.nimasi.game.play.world.TileType;
+import com.nimasi.game.play.world.TiledGameMap;
 
 /**
- * NimasiJumper Core Application
+ * NimasiJumper Game Application
  */
 public class NimasiJumper extends ApplicationAdapter {
 
     OrthographicCamera cam;
     SpriteBatch batch;
-    Texture img;
 
     GameMap gameMap;
 
@@ -28,8 +26,6 @@ public class NimasiJumper extends ApplicationAdapter {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
-
         cam = new OrthographicCamera();
         cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.update();
@@ -60,7 +56,7 @@ public class NimasiJumper extends ApplicationAdapter {
             }
         }
 
-        gameMap.render(cam);
+        gameMap.render(cam, batch);
     }
 
     /**
@@ -69,6 +65,5 @@ public class NimasiJumper extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
     }
 }

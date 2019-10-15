@@ -1,4 +1,4 @@
-package com.nimasi.game.world;
+package com.nimasi.game.play.world;
 
 import java.util.HashMap;
 
@@ -10,9 +10,9 @@ public enum TileType {
     GRASS(1, true, "Grass"),
     DIRT(2, true, "Dirt"),
     SKY(3, false, "Sky"),
-    LAVA(1, true, "Lava"),
-    CLOUD(1, true, "Cloud"),
-    STONES(1, true, "Stones");
+    LAVA(4, true, "Lava"),
+    CLOUD(5, true, "Cloud"),
+    STONES(6, true, "Stones");
 
     public static final int TILE_SIZE = 16;
 
