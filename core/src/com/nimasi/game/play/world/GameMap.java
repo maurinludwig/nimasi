@@ -68,6 +68,15 @@ public abstract class GameMap {
      */
     public abstract TileType getTileTypeByCoordinate(int layer, int col, int row);
 
+    /**
+     * Checks if rectangle collides with map.
+     *
+     * @param x:      X Position
+     * @param y:      Y Position
+     * @param width:  Width of rect
+     * @param height: Height of rect
+     * @return boolean
+     */
     public boolean doesRectCollideWithMap(float x, float y, int width, int height) {
         if (x < 0 || y < 0 || x + width > getPixelWidth() || y + height > getPixelHeight()) {
             return true;
@@ -106,10 +115,20 @@ public abstract class GameMap {
      */
     public abstract int getLayers();
 
+    /**
+     * Gets pixel width
+     *
+     * @return int: width in pixel
+     */
     public int getPixelWidth() {
         return this.getWidth() * TileType.TILE_SIZE;
     }
 
+    /**
+     * Gets pixel height
+     *
+     * @return int: height in pixel
+     */
     public int getPixelHeight() {
         return this.getHeight() * TileType.TILE_SIZE;
     }

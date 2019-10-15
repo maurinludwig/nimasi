@@ -28,7 +28,7 @@ public enum TileType {
      * @param boolean collidable: True if collidable
      * @param str     name: TileType Name
      */
-    private TileType(int id, boolean collidable, String name) {
+    TileType(int id, boolean collidable, String name) {
         this(id, collidable, name, 0);
     }
 
@@ -40,7 +40,7 @@ public enum TileType {
      * @param str     name: TileType Name
      * @param float   damage: Damage of tile
      */
-    private TileType(int id, boolean collidable, String name, float damage) {
+    TileType(int id, boolean collidable, String name, float damage) {
         this.id = id;
         this.collidable = collidable;
         this.name = name;
