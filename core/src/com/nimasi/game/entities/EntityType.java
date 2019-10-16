@@ -1,4 +1,4 @@
-package com.nimasi.game.play.entities;
+package com.nimasi.game.entities;
 
 /**
  * Declares EntityType

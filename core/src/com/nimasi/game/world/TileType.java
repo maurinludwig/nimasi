@@ -1,4 +1,4 @@
-package com.nimasi.game.play.world;
+package com.nimasi.game.world;
 
 import java.util.HashMap;
 

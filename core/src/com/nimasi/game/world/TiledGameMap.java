@@ -1,4 +1,4 @@
-package com.nimasi.game.play.world;
+package com.nimasi.game.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;

@@ -1,8 +1,8 @@
-package com.nimasi.game.play.entities;
+package com.nimasi.game.entities;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.nimasi.game.play.world.GameMap;
+import com.nimasi.game.world.GameMap;
 
 /**
  * Entity Methods

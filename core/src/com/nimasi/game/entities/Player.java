@@ -1,10 +1,10 @@
-package com.nimasi.game.play.entities;
+package com.nimasi.game.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.nimasi.game.play.world.GameMap;
+import com.nimasi.game.world.GameMap;
 
 /**
  * Player Entity

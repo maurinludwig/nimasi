@@ -1,9 +1,9 @@
-package com.nimasi.game.play.world;
+package com.nimasi.game.world;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.nimasi.game.play.entities.Entity;
-import com.nimasi.game.play.entities.Player;
+import com.nimasi.game.entities.Entity;
+import com.nimasi.game.entities.Player;
 
 import java.util.ArrayList;
 
