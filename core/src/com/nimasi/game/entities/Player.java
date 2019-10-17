@@ -11,8 +11,8 @@ import com.nimasi.game.world.GameMap;
  */
 public class Player extends Entity {
 
-    private static final int SPEED = 80;
-    private static final int JUMP_VELOCITY = 5;
+    private static final int SPEED = 95;
+    private static final int JUMP_VELOCITY = 7;
 
     Texture image;
 

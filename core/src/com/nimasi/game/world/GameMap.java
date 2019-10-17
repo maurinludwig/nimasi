@@ -17,7 +17,7 @@ public abstract class GameMap {
 
     public GameMap() {
         entities = new ArrayList<>();
-        player = new Player(40, 700, this);
+        player = new Player(220, 100, this);
         entities.add(player);
     }
 
@@ -41,7 +41,7 @@ public abstract class GameMap {
      */
     public void update(float delta) {
         for (Entity entity : entities) {
-            entity.update(delta, -9.8f);
+            entity.update(delta, -15f);
         }
     }
 
@@ -90,7 +90,7 @@ public abstract class GameMap {
             for (int col = (int) (x / TileType.TILE_SIZE); col < Math.ceil((x + width) / TileType.TILE_SIZE); col++) {
                 for (int layer = 0; layer < getLayers(); layer++) {
                     TileType type = getTileTypeByCoordinate(layer, col, row);
-                    if (type != null && type.isCollidable())
+                    if (type != null && type.isCollidable() && layer != 0)
                         return true;
                 }
             }
