@@ -10,18 +10,22 @@ import com.nimasi.game.world.GameMap;
 import com.nimasi.game.world.TileType;
 import com.nimasi.game.world.TiledGameMap;
 
+/**
+ * Game Screen Class
+ */
 public class GameScreen implements Screen {
 
     OrthographicCamera cam;
-
     GameMap gameMap;
-
     NimasiJumper game;
 
     public GameScreen(NimasiJumper game) {
         this.game = game;
     }
 
+    /**
+     * Sets cam and map
+     */
     @Override
     public void show() {
         cam = new OrthographicCamera();
@@ -31,9 +35,14 @@ public class GameScreen implements Screen {
         gameMap = new TiledGameMap();
     }
 
+    /**
+     * Renders input and map
+     *
+     * @param delta: Delta time
+     */
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (Gdx.input.isTouched())
@@ -55,26 +64,44 @@ public class GameScreen implements Screen {
         gameMap.render(cam, game.batch);
     }
 
+    /**
+     * Resizes screen
+     *
+     * @param width:  Width of window
+     * @param height: Height of window
+     */
     @Override
     public void resize(int width, int height) {
 
     }
 
+    /**
+     * Pauses screen
+     */
     @Override
     public void pause() {
 
     }
 
+    /**
+     * Resumes screen
+     */
     @Override
     public void resume() {
 
     }
 
+    /**
+     * Hides Screen
+     */
     @Override
     public void hide() {
 
     }
 
+    /**
+     * Disposes Screen
+     */
     @Override
     public void dispose() {
 

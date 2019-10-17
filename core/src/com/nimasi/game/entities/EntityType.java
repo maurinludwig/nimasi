@@ -46,6 +46,7 @@ public enum EntityType {
 
     /**
      * Gets height
+     *
      * @return height
      */
     public int getHeight() {
@@ -54,6 +55,7 @@ public enum EntityType {
 
     /**
      * Gets Weight
+     *
      * @return weight
      */
     public float getWeight() {
