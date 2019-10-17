@@ -13,18 +13,22 @@ import java.util.ArrayList;
 public abstract class GameMap {
 
     protected ArrayList<Entity> entities;
+    protected Player player;
 
     public GameMap() {
         entities = new ArrayList<>();
-        entities.add(new Player(40, 700, this));
+        player = new Player(40, 700, this);
+        entities.add(player);
     }
 
     /**
      * Rendering game map with given cam
-     *
+     *<
      * @param camera: Orthographic Camera
      */
     public void render(OrthographicCamera camera, SpriteBatch batch) {
+        camera.position.set(player.getX(), player.getY(), 0);
+        camera.update();
         for (Entity entity : entities) {
             entity.render(batch);
         }

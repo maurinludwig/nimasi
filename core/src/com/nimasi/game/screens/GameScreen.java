@@ -45,10 +45,6 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (Gdx.input.isTouched())
-            cam.translate(-Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
-        cam.update();
-
         if (Gdx.input.justTouched()) {
 //			Gets position in game world
             Vector3 pos = cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
