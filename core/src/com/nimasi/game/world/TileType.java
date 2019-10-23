@@ -1,11 +1,16 @@
 package com.nimasi.game.world;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.MapProperties;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
+
 import java.util.HashMap;
 
 /**
  * Defines TileTypes
  */
-public enum TileType {
+public enum TileType implements TiledMapTile {
 
     GRASS(1, true, "Grass"),
     DIRT(2, true, "Dirt"),
@@ -54,6 +59,99 @@ public enum TileType {
      */
     public int getId() {
         return id;
+    }
+
+    @Override
+    public void setId(int id) {
+
+    }
+
+    /**
+     * @return the {@link BlendMode} to use for rendering the tile
+     */
+    @Override
+    public BlendMode getBlendMode() {
+        return null;
+    }
+
+    /**
+     * Sets the {@link BlendMode} to use for rendering the tile
+     *
+     * @param blendMode the blend mode to use for rendering the tile
+     */
+    @Override
+    public void setBlendMode(BlendMode blendMode) {
+
+    }
+
+    /**
+     * @return texture region used to render the tile
+     */
+    @Override
+    public TextureRegion getTextureRegion() {
+        return null;
+    }
+
+    /**
+     * Sets the texture region used to render the tile
+     *
+     * @param textureRegion
+     */
+    @Override
+    public void setTextureRegion(TextureRegion textureRegion) {
+
+    }
+
+    /**
+     * @return the amount to offset the x position when rendering the tile
+     */
+    @Override
+    public float getOffsetX() {
+        return 0;
+    }
+
+    /**
+     * Set the amount to offset the x position when rendering the tile
+     *
+     * @param offsetX
+     */
+    @Override
+    public void setOffsetX(float offsetX) {
+
+    }
+
+    /**
+     * @return the amount to offset the y position when rendering the tile
+     */
+    @Override
+    public float getOffsetY() {
+        return 0;
+    }
+
+    /**
+     * Set the amount to offset the y position when rendering the tile
+     *
+     * @param offsetY
+     */
+    @Override
+    public void setOffsetY(float offsetY) {
+
+    }
+
+    /**
+     * @return tile's properties set
+     */
+    @Override
+    public MapProperties getProperties() {
+        return null;
+    }
+
+    /**
+     * @return collection of objects contained in the tile
+     */
+    @Override
+    public MapObjects getObjects() {
+        return null;
     }
 
     /**

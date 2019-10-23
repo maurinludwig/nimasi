@@ -14,7 +14,8 @@ public class Player extends Entity {
     private static final int SPEED = 95;
     private static final int JUMP_VELOCITY = 7;
 
-    Texture image;
+    private Texture image;
+    private boolean isJumping = false;
 
     /**
      * Player Constructor
@@ -36,31 +37,58 @@ public class Player extends Entity {
      */
     @Override
     public void update(float deltaTime, float gravity) {
-        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && grounded) {
-            this.velocityY += JUMP_VELOCITY * getWeight();
+        // Handle gravity
+        boolean collidesWithMap =  map.doesRectCollideWithMap(this);
+
+        System.out.printf("vY=%.0f G=%b mapC=%b %n", velocityY, grounded, collidesWithMap);
+        if (collidesWithMap && !isJumping) {
+            velocityY = 0;
+            grounded = true;
+        } else if (!grounded) {
+            isJumping = false;
+        } else if (!collidesWithMap) {
+            grounded = false;
+        }
+
+        // Apply gravity or move if velocity is not 0
+        if (!grounded || velocityY != 0) {
+            velocityY += gravity * deltaTime * getWeight();
+            moveY(pos.y + (velocityY * deltaTime));
+        }
+
+        // Handle Jumps
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && grounded) {
+            velocityY += JUMP_VELOCITY * getWeight();
+            isJumping = true;
+            grounded = false;
         } else if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && !grounded && this.velocityY > 0) {
             this.velocityY += JUMP_VELOCITY * getWeight() * deltaTime;
         }
 
-        super.update(deltaTime, gravity);
-
+        // Handle horizontal movement
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            moveX(-SPEED * deltaTime);
+            moveX(pos.x + (-SPEED * deltaTime));
+        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            moveX(pos.x +(SPEED * deltaTime));
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            moveX(SPEED * deltaTime);
-        }
+        if (grounded)
+            velocityY = 0;
     }
 
     /**
      * Renders the game
      *
-     * @param batch: Batch Var
+     * @param batch: Sprite Batch
      */
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(image, pos.x, pos.y, getWidth(), getHeight());
 
+    }
+
+    @Override
+    public String toString() {
+        return String.format("<Player X=%.0f Y=%.0f W=%.0f H=%.0f>", getX(), getY(), getWidth(), getHeight());
     }
 }

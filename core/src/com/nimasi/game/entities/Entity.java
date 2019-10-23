@@ -7,7 +7,7 @@ import com.nimasi.game.world.GameMap;
 /**
  * Entity Methods
  */
-public abstract class Entity {
+public abstract class Entity implements BoundingRect {
 
     protected Vector2 pos;
     protected EntityType type;
@@ -18,10 +18,10 @@ public abstract class Entity {
     /**
      * Constructor
      *
-     * @param x:    Vertical location
-     * @param y:    Horizontal location
-     * @param type: Entity Type
-     * @param map:  Game Map
+     * @param x    :    Vertical location
+     * @param y    :    Horizontal location
+     * @param type : Entity Type
+     * @param map  :  Game Map
      */
     public Entity(float x, float y, EntityType type, GameMap map) {
         this.pos = new Vector2(x, y);
@@ -35,23 +35,32 @@ public abstract class Entity {
      * @param deltaTime: Time since last game update
      * @param gravity:   Gravity factor
      */
-    public void update(float deltaTime, float gravity) {
-        float newY = pos.y;
-
-        this.velocityY += gravity * deltaTime * getHeight();
-        newY += this.velocityY * deltaTime;
-
-        if (map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight())) {
-            if (velocityY < 0) {
-                this.pos.y = (float) Math.floor(pos.y);
-                grounded = true;
-            }
-            this.velocityY = 0;
-        } else {
-            this.pos.y = newY;
-            grounded = false;
-        }
-    }
+    public void update(float deltaTime, float gravity) {}
+//    public void update(float deltaTime, float gravity) {
+//        float newY = pos.y;
+//
+//        this.velocityY += gravity * deltaTime * getWeight();
+//        newY += this.velocityY * deltaTime;
+//
+//        boolean collidesWithCloud = map.willRectCollideWithClouds(new BoundingRectImpl(
+//                pos.x,
+//                newY,
+//                getWidth(),
+//                getHeight()
+//        ));
+//
+//        boolean collidesWithMap = map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight());
+//
+//        if (collidesWithMap || collidesWithCloud) {
+//            velocityY = 0;
+//            grounded = true;
+//            pos.y = (float) Math.floor(pos.y);
+//        } else {
+//            this.pos.y = newY;
+//            grounded = false;
+//
+//        }
+//    }
 
     public abstract void render(SpriteBatch batch);
 
@@ -60,12 +69,18 @@ public abstract class Entity {
      *
      * @param amount: Amount of pixels to move
      */
-    protected void moveX(float amount) {
-        float newX = pos.x + amount;
-        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight())) {
-            this.pos.x = newX;
-        }
-    }
+//    void moveX(float amount) {
+//        float newX = pos.x + amount;
+//        boolean collidesWithCloud = map.willRectCollideWithClouds(new BoundingRectImpl(
+//                newX,
+//                pos.y,
+//                getWidth(),
+//                getHeight()
+//        ));
+//        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !collidesWithCloud) {
+//            this.pos.x = newX;
+//        }
+//    }
 
     /**
      * Gets Postition
@@ -117,7 +132,7 @@ public abstract class Entity {
      *
      * @return float: width
      */
-    public int getWidth() {
+    public float getWidth() {
         return type.getWidth();
     }
 
@@ -126,7 +141,7 @@ public abstract class Entity {
      *
      * @return int: height
      */
-    public int getHeight() {
+    public float getHeight() {
         return type.getHeight();
     }
 
@@ -137,5 +152,31 @@ public abstract class Entity {
      */
     public float getWeight() {
         return type.getWeight();
+    }
+
+    public boolean isCollidingWithBoundingRect(BoundingRect r) {
+        return BoundingRectImpl.doBoundingRectsCollide(this, r);
+    }
+
+    public void moveX(float newX) {
+
+        if (type.isCollidable() && map.doesRectCollideWithMap(new BoundingRectImpl(newX, getY(), getWidth(), getHeight()))) {
+            System.out.println(newX + " " + getY() + " " + getWidth() + " " + getHeight());
+            System.out.println(String.format("[%s] cannot move X, would collide", this));
+            return;
+        }
+
+        pos.x = newX;
+    }
+
+    public void moveY(float newY) {
+        if (type.isCollidable() && map.doesRectCollideWithMap(new BoundingRectImpl(getX(), newY, getWidth(), getHeight()))) {
+            System.out.println(getX() + " " + newY + " " + getWidth() + " " + getHeight());
+            System.out.println(String.format("[%s] cannot move Y, would collide", this));
+            grounded = true;
+            return;
+        }
+
+        pos.y = newY;
     }
 }

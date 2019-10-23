@@ -1,9 +1,10 @@
 package com.nimasi.game.world;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.nimasi.game.entities.Entity;
-import com.nimasi.game.entities.Player;
+import com.nimasi.game.entities.*;
 
 import java.util.ArrayList;
 
@@ -12,10 +13,11 @@ import java.util.ArrayList;
  */
 public abstract class GameMap {
 
-    protected ArrayList<Entity> entities;
-    protected Player player;
+    private ArrayList<Entity> entities;
+    public Player player;
+    private int cloudsUsed = 0;
 
-    public GameMap() {
+    GameMap() {
         entities = new ArrayList<>();
         player = new Player(220, 100, this);
         entities.add(player);
@@ -23,7 +25,8 @@ public abstract class GameMap {
 
     /**
      * Rendering game map with given cam
-     *<
+     * <
+     *
      * @param camera: Orthographic Camera
      */
     public void render(OrthographicCamera camera, SpriteBatch batch) {
@@ -31,6 +34,19 @@ public abstract class GameMap {
         camera.update();
         for (Entity entity : entities) {
             entity.render(batch);
+        }
+
+        BoundingRect playerRect = new BoundingRectImpl(
+                player.getX(),
+                player.getY() - 32f,
+                player.getWidth(),
+                player.getHeight()
+        );
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && !doesRectCollideWithMap(playerRect) && cloudsUsed < 3) {
+            cloudsUsed = cloudsUsed + 1;
+            Cloud cloud = new Cloud(player.getX(), player.getY() - 32, this);
+            entities.add(cloud);
         }
     }
 
@@ -81,21 +97,52 @@ public abstract class GameMap {
      * @param height: Height of rect
      * @return boolean
      */
-    public boolean doesRectCollideWithMap(float x, float y, int width, int height) {
-        if (x < 0 || y < 0 || x + width > getPixelWidth() || y + height > getPixelHeight()) {
+    public boolean doesRectCollideWithMap(BoundingRect r) {
+        float rightX = r.getX() + r.getWidth();
+        float topY = r.getY() + r.getHeight();
+
+        if (r.getX() <= 0 || r.getY() <= 0 || rightX >= getPixelWidth() || topY >= getPixelHeight()) {
             return true;
         }
 
-        for (int row = (int) (y / TileType.TILE_SIZE); row < Math.ceil((y + height) / TileType.TILE_SIZE); row++) {
-            for (int col = (int) (x / TileType.TILE_SIZE); col < Math.ceil((x + width) / TileType.TILE_SIZE); col++) {
-                for (int layer = 0; layer < getLayers(); layer++) {
-                    TileType type = getTileTypeByCoordinate(layer, col, row);
-                    if (type != null && type.isCollidable() && layer != 0)
-                        return true;
+        int leftOuterTileIndex = (int) (r.getX() / TileType.TILE_SIZE);
+        int rightOuterTileIndex = (int) (rightX / TileType.TILE_SIZE);
+
+        int bottomOuterTileIndex = (int) (r.getY() / TileType.TILE_SIZE);
+        int topOuterTileIndex = (int) (topY / TileType.TILE_SIZE);
+
+//        System.out.println(String.format("Getting tiles from left=%d, right=%d, bottom=%d, top=%d x=%d y=%d and width=%d height=%d",
+//                leftOuterTileIndex, rightOuterTileIndex, bottomOuterTileIndex, topOuterTileIndex,
+//                leftOuterTileIndex *16,
+//                bottomOuterTileIndex *16,
+//                (rightOuterTileIndex - leftOuterTileIndex) * 16,
+//                (topOuterTileIndex - bottomOuterTileIndex) * 16
+//        ));
+
+        for (int row = bottomOuterTileIndex; row <= topOuterTileIndex; row++) {
+            for (int col = leftOuterTileIndex; col <= rightOuterTileIndex; col++) {
+                TileType tile = getTileTypeByCoordinate(1, col, row);
+                if (Gdx.input.isKeyPressed(Input.Keys.G))
+                    System.out.println("COL:" + col + "ROW:" + row);
+                if (tile != null && tile.isCollidable()) {
+                    System.out.println(String.format("collision detected with %s tile", tile.getName()));
+                    return true;
                 }
             }
         }
+
         return false;
+    }
+
+    public boolean willRectCollideWithClouds(BoundingRect r) {
+        return entities
+                .stream()
+                .filter(e -> e.getType().equals(EntityType.CLOUD))
+                .anyMatch(e -> {
+                    boolean colliding = r.isCollidingWithBoundingRect(e);
+                    if (colliding) System.out.println(String.format("Cloud %s is colliding with %s", e, r));
+                    return colliding;
+                });
     }
 
     /**

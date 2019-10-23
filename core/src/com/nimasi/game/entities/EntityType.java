@@ -5,11 +5,12 @@ package com.nimasi.game.entities;
  */
 public enum EntityType {
 
-    PLAYER("player", 14, 32, 40);
-
+    CLOUD("cloud", 16, 16, 0, false),
+    PLAYER("player", 14, 30, 40, true);
     private String id;
     private int width, height;
     private float weight;
+    private boolean collidable;
 
     /**
      * Constructor
@@ -19,11 +20,12 @@ public enum EntityType {
      * @param height: Height from Entity
      * @param weight: Width from Entity
      */
-    EntityType(String id, int width, int height, float weight) {
+    EntityType(String id, int width, int height, float weight, boolean collidable) {
         this.id = id;
         this.width = width;
         this.height = height;
         this.weight = weight;
+        this.collidable = collidable;
     }
 
     /**
@@ -60,5 +62,9 @@ public enum EntityType {
      */
     public float getWeight() {
         return weight;
+    }
+
+    public boolean isCollidable() {
+        return collidable;
     }
 }
