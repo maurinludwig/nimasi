@@ -57,9 +57,4 @@ public class BoundingRectImpl implements BoundingRect {
         float rY2 = r2.getY() + r2.getHeight();
         return (rY1 >= ourY1 && rY1 <= ourY2) || (rY2 >= ourY1 && rY2 <= ourY2);
     }
-
-    @Override
-    public String toString() {
-        return String.format("<BDRI X=%.0f Y=%.0f W=%.0f H=%.0f>", getX(), getY(), getWidth(), getHeight());
-    }
 }

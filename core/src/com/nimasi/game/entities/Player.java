@@ -40,7 +40,6 @@ public class Player extends Entity {
         // Handle gravity
         boolean collidesWithMap =  map.doesRectCollideWithMap(this);
 
-        System.out.printf("vY=%.0f G=%b mapC=%b %n", velocityY, grounded, collidesWithMap);
         if (collidesWithMap && !isJumping) {
             velocityY = 0;
             grounded = true;

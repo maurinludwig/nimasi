@@ -161,8 +161,6 @@ public abstract class Entity implements BoundingRect {
     public void moveX(float newX) {
 
         if (type.isCollidable() && map.doesRectCollideWithMap(new BoundingRectImpl(newX, getY(), getWidth(), getHeight()))) {
-            System.out.println(newX + " " + getY() + " " + getWidth() + " " + getHeight());
-            System.out.println(String.format("[%s] cannot move X, would collide", this));
             return;
         }
 
@@ -171,8 +169,6 @@ public abstract class Entity implements BoundingRect {
 
     public void moveY(float newY) {
         if (type.isCollidable() && map.doesRectCollideWithMap(new BoundingRectImpl(getX(), newY, getWidth(), getHeight()))) {
-            System.out.println(getX() + " " + newY + " " + getWidth() + " " + getHeight());
-            System.out.println(String.format("[%s] cannot move Y, would collide", this));
             grounded = true;
             return;
         }

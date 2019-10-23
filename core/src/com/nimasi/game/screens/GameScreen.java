@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.nimasi.game.NimasiJumper;
+import com.nimasi.game.entities.BoundingRectImpl;
 import com.nimasi.game.world.GameMap;
 import com.nimasi.game.world.TileType;
 import com.nimasi.game.world.TiledGameMap;
@@ -17,7 +18,6 @@ public class GameScreen implements Screen {
     OrthographicCamera cam;
     GameMap gameMap;
     NimasiJumper game;
-
 
 
     public GameScreen(NimasiJumper game) {
@@ -46,8 +46,13 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if (gameMap.doesRectCollideWithMap(gameMap.player)) {
-            if (gameMap.getTileTypeByLocation(1, gameMap.player.getX(), gameMap.player.getY() - 1) == TileType.LAVA) {
+        if (gameMap.doesRectCollideWithMap(new BoundingRectImpl(
+                gameMap.player.getX(),
+                gameMap.player.getY() - 5,
+                gameMap.player.getWidth(),
+                gameMap.player.getHeight()
+        ))) {
+            if (gameMap.getTileTypeByLocation(1, gameMap.player.getX(), gameMap.player.getY() - 10) == TileType.LAVA) {
                 Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

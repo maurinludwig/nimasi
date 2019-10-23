@@ -111,21 +111,12 @@ public abstract class GameMap {
         int bottomOuterTileIndex = (int) (r.getY() / TileType.TILE_SIZE);
         int topOuterTileIndex = (int) (topY / TileType.TILE_SIZE);
 
-//        System.out.println(String.format("Getting tiles from left=%d, right=%d, bottom=%d, top=%d x=%d y=%d and width=%d height=%d",
-//                leftOuterTileIndex, rightOuterTileIndex, bottomOuterTileIndex, topOuterTileIndex,
-//                leftOuterTileIndex *16,
-//                bottomOuterTileIndex *16,
-//                (rightOuterTileIndex - leftOuterTileIndex) * 16,
-//                (topOuterTileIndex - bottomOuterTileIndex) * 16
-//        ));
-
         for (int row = bottomOuterTileIndex; row <= topOuterTileIndex; row++) {
             for (int col = leftOuterTileIndex; col <= rightOuterTileIndex; col++) {
                 TileType tile = getTileTypeByCoordinate(1, col, row);
-                if (Gdx.input.isKeyPressed(Input.Keys.G))
-                    System.out.println("COL:" + col + "ROW:" + row);
                 if (tile != null && tile.isCollidable()) {
-                    System.out.println(String.format("collision detected with %s tile", tile.getName()));
+                    return true;
+                } else if (willRectCollideWithClouds(r)) {
                     return true;
                 }
             }
@@ -138,11 +129,7 @@ public abstract class GameMap {
         return entities
                 .stream()
                 .filter(e -> e.getType().equals(EntityType.CLOUD))
-                .anyMatch(e -> {
-                    boolean colliding = r.isCollidingWithBoundingRect(e);
-                    if (colliding) System.out.println(String.format("Cloud %s is colliding with %s", e, r));
-                    return colliding;
-                });
+                .anyMatch(r::isCollidingWithBoundingRect);
     }
 
     /**

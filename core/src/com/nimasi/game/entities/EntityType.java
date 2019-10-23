@@ -6,7 +6,7 @@ package com.nimasi.game.entities;
 public enum EntityType {
 
     CLOUD("cloud", 16, 16, 0, false),
-    PLAYER("player", 14, 30, 40, true);
+    PLAYER("player", 20, 40, 50, true);
     private String id;
     private int width, height;
     private float weight;
