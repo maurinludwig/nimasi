@@ -43,7 +43,7 @@ public abstract class GameMap {
                 player.getHeight()
         );
 
-        if (Gdx.input.isKeyPressed(Input.Keys.F) && !doesRectCollideWithMap(playerRect) && cloudsUsed < 3) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F) && !doesRectCollideWithMap(playerRect) && cloudsUsed < 3) {
             cloudsUsed = cloudsUsed + 1;
             Cloud cloud = new Cloud(player.getX(), player.getY() - 32, this);
             entities.add(cloud);

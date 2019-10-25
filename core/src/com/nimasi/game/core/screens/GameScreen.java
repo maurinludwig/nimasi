@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
                 gameMap.player.getWidth(),
                 gameMap.player.getHeight()
         ))) {
-            if (gameMap.getTileTypeByLocation(1, gameMap.player.getX(), gameMap.player.getY() - 10) == TileType.LAVA) {
+            if (gameMap.getTileTypeByLocation(1, gameMap.player.getX() + (gameMap.player.getWidth() / 2), gameMap.player.getY() - 10) == TileType.LAVA) {
                 Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

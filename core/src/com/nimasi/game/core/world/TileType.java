@@ -91,6 +91,11 @@ public enum TileType implements TiledMapTile {
         return null;
     }
 
+    @Override
+    public void setTextureRegion(TextureRegion textureRegion) {
+
+    }
+
     /**
      * @return the amount to offset the x position when rendering the tile
      */

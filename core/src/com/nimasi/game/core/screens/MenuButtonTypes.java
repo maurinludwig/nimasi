@@ -7,7 +7,7 @@ import static com.nimasi.game.core.NimasiJumper.WIDTH;
 /**
  * Types of GameButtons
  */
-public enum GameButtonTypes {
+public enum MenuButtonTypes {
     PLAY(
             WIDTH / 2 - 150 / 2 - 8,
             400,
@@ -58,7 +58,7 @@ public enum GameButtonTypes {
      * @param activeTexture:   Texture of button when hovered
      * @param inactiveTexture: Texture of button when not hovered
      */
-    GameButtonTypes(Integer posX, Integer posY, Integer width, Integer height, Texture activeTexture, Texture inactiveTexture) {
+    MenuButtonTypes(Integer posX, Integer posY, Integer width, Integer height, Texture activeTexture, Texture inactiveTexture) {
         this.positionX = posX;
         this.positionY = posY;
         this.width = width;

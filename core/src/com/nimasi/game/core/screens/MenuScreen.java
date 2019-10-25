@@ -16,7 +16,7 @@ import static com.nimasi.game.core.NimasiJumper.WIDTH;
  */
 public class MenuScreen implements Screen {
 
-    private final List<GameButtonTypes> buttons;
+    private final List<MenuButtonTypes> buttons;
 
     private static final int LOGO_WIDTH = 400;
     private static final int LOGO_HEIGHT = 100;
@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
     public MenuScreen(NimasiJumper game) {
         this.game = game;
         //noinspection NonJREEmulationClassesInClientCode
-        buttons = List.of(GameButtonTypes.values());
+        buttons = List.of(MenuButtonTypes.values());
         logo = new Texture("nimasijumper.png");
     }
 
@@ -107,7 +107,7 @@ public class MenuScreen implements Screen {
      * @param button: Button to check
      * @return boolean: True if mouse is on button
      */
-    private static final boolean isButtonActive(GameButtonTypes button) {
+    private static final boolean isButtonActive(MenuButtonTypes button) {
         return Gdx.input.getX() < button.getPositionX() + button.getWidth() && Gdx.input.getX() > button.getPositionX() && HEIGHT - Gdx.input.getY() < button.getPositionY() + button.getHeight() && HEIGHT - Gdx.input.getY() > button.getPositionY();
     }
 
