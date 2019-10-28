@@ -151,7 +151,7 @@ public abstract class GameMap {
      *
      * @return int: Amount of layers
      */
-    public abstract int getLayers();
+    public abstract int getAmountOfLayers();
 
     /**
      * Gets pixel width

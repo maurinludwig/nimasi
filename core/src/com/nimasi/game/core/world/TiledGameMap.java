@@ -105,7 +105,7 @@ public class TiledGameMap extends GameMap {
      * @return int: Amount of layers
      */
     @Override
-    public int getLayers() {
+    public int getAmountOfLayers() {
         return tiledMap.getLayers().getCount();
     }
 }

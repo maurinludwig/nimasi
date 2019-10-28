@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 /**
  * Defines TileTypes
+ * A Tile is a 16 x 16 pixel block. Used to build the map.
  */
 public enum TileType implements TiledMapTile {
 
