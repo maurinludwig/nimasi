@@ -4,12 +4,13 @@ import com.badlogic.gdx.graphics.Texture;
 
 import static com.nimasi.game.core.NimasiJumper.WIDTH;
 
+
 /**
  * Types of GameButtons
  */
 public enum MenuButtonTypes {
     PLAY(
-            WIDTH / 2 - 150 / 2 - 8,
+            WIDTH / 2 - 150 / 2, // Calculating the middle of the screen minus offset
             400,
             150,
             50,
@@ -17,7 +18,7 @@ public enum MenuButtonTypes {
             new Texture("play.png")
     ),
     HIGH_SCORE(
-            WIDTH / 2 - 250 / 2 - 8,
+            WIDTH / 2 - 250 / 2, // Calculating the middle of the screen minus offset
             300,
             250,
             50,
@@ -25,7 +26,7 @@ public enum MenuButtonTypes {
             new Texture("highscore.png")
     ),
     SETTINGS(
-            WIDTH / 2 - 250 / 2 - 8,
+            WIDTH / 2 - 250 / 2, // Calculating the middle of the screen minus offset
             200,
             250,
             50,
@@ -33,7 +34,7 @@ public enum MenuButtonTypes {
             new Texture("settings.png")
     ),
     QUIT(
-            WIDTH / 2 - 100 / 2 - 8,
+            WIDTH / 2 - 100 / 2, // Calculating the middle of the screen minus offset
             100,
             100,
             50,

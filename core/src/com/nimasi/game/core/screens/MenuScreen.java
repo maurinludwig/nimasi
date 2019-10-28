@@ -23,6 +23,8 @@ public class MenuScreen implements Screen {
     private static final int LOGO_WIDTH = 400;
     private static final int LOGO_HEIGHT = 100;
     private static final int LOGO_Y = 550;
+    private static final Integer PLAY_WIDTH = 150;
+
 
     private NimasiJumper game;
     private HighscoreManager manager;
@@ -112,7 +114,10 @@ public class MenuScreen implements Screen {
      * @return boolean: True if mouse is on button
      */
     private static final boolean isButtonActive(MenuButtonTypes button) {
-        return Gdx.input.getX() < button.getPositionX() + button.getWidth() && Gdx.input.getX() > button.getPositionX() && HEIGHT - Gdx.input.getY() < button.getPositionY() + button.getHeight() && HEIGHT - Gdx.input.getY() > button.getPositionY();
+        return (Gdx.input.getX() < button.getPositionX() + button.getWidth() && // Checks bottom right corner
+                Gdx.input.getX() > button.getPositionX() && // Checks bottom left corner
+                HEIGHT - Gdx.input.getY() < button.getPositionY() + button.getHeight() && // Checks top right corner
+                HEIGHT - Gdx.input.getY() > button.getPositionY()); // Checks top left corner
     }
 
     /**

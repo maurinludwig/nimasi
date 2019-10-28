@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
     /**
      * Renders input and map
      *
-     * @param delta: Delta time
+     * @param delta: Delta time / Passed time since last frame
      */
     @Override
     public void render(float delta) {
