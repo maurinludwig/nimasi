@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.nimasi.game.core.NimasiJumper;
 import com.nimasi.game.core.entities.BoundingRectImpl;
+import com.nimasi.game.core.highscore.Highscore;
+import com.nimasi.game.core.highscore.HighscoreManager;
 import com.nimasi.game.core.world.GameMap;
 import com.nimasi.game.core.world.TileType;
 import com.nimasi.game.core.world.TiledGameMap;
@@ -18,10 +20,13 @@ public class GameScreen implements Screen {
     OrthographicCamera cam;
     GameMap gameMap;
     NimasiJumper game;
+    private HighscoreManager manager;
 
 
-    public GameScreen(NimasiJumper game) {
+
+    public GameScreen(NimasiJumper game, HighscoreManager manager) {
         this.game = game;
+        this.manager = manager;
     }
 
     /**
@@ -57,6 +62,7 @@ public class GameScreen implements Screen {
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 cam.update();
+                manager.saveHighscore(new Highscore((int) gameMap.player.getY(), "Maurin", 60));
                 game.setScreen(new MenuScreen(game));
             }
         }

@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.nimasi.game.core.NimasiJumper;
+import com.nimasi.game.core.highscore.Highscore;
+import com.nimasi.game.core.highscore.HighscoreManager;
 
 import java.util.List;
 
@@ -22,7 +24,8 @@ public class MenuScreen implements Screen {
     private static final int LOGO_HEIGHT = 100;
     private static final int LOGO_Y = 550;
 
-    NimasiJumper game;
+    private NimasiJumper game;
+    private HighscoreManager manager;
 
     private Texture logo;
 
@@ -36,6 +39,7 @@ public class MenuScreen implements Screen {
         //noinspection NonJREEmulationClassesInClientCode
         buttons = List.of(MenuButtonTypes.values());
         logo = new Texture("nimasijumper.png");
+        manager = new HighscoreManager();
     }
 
     /**
@@ -73,12 +77,12 @@ public class MenuScreen implements Screen {
                 switch (button) {
                     case PLAY: {
                         this.dispose();
-                        game.setScreen(new GameScreen(game));
+                        game.setScreen(new GameScreen(game, manager));
                         break;
                     }
                     case HIGH_SCORE: {
                         this.dispose();
-                        game.setScreen(new HighscoreScreen(game));
+                        game.setScreen(new HighscoreScreen(game, manager));
                         break;
                     }
                     case SETTINGS: {
