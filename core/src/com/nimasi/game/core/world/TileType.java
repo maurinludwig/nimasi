@@ -29,9 +29,9 @@ public enum TileType implements TiledMapTile {
     /**
      * Constructor for Tile Type
      *
-     * @param int     id: Tile type id
-     * @param boolean collidable: True if collidable
-     * @param str     name: TileType Name
+     * @param id:         Tile type id
+     * @param collidable: True if collidable
+     * @param name:       TileType Name
      */
     TileType(int id, boolean collidable, String name) {
         this(id, collidable, name, 0);
@@ -40,10 +40,10 @@ public enum TileType implements TiledMapTile {
     /**
      * Setting values for Tile Type
      *
-     * @param int     id: Tile type id
-     * @param boolean collidable: True if collidable
-     * @param str     name: TileType Name
-     * @param float   damage: Damage of tile
+     * @param id:         Tile type id
+     * @param collidable: True if collidable
+     * @param name:       TileType Name
+     * @param damage:     Damage of tile
      */
     TileType(int id, boolean collidable, String name, float damage) {
         this.id = id;
@@ -61,13 +61,18 @@ public enum TileType implements TiledMapTile {
         return id;
     }
 
+    /**
+     * Sets id
+     *
+     * @param id: id to set
+     */
     @Override
     public void setId(int id) {
 
     }
 
     /**
-     * @return the {@link BlendMode} to use for rendering the tile
+     * @return the {@link BlendMode} to use for rendering the tile (not used)
      */
     @Override
     public BlendMode getBlendMode() {
@@ -75,7 +80,7 @@ public enum TileType implements TiledMapTile {
     }
 
     /**
-     * Sets the {@link BlendMode} to use for rendering the tile
+     * Sets the {@link BlendMode} to use for rendering the tile (not used)
      *
      * @param blendMode the blend mode to use for rendering the tile
      */
@@ -85,6 +90,8 @@ public enum TileType implements TiledMapTile {
     }
 
     /**
+     * Gets texture region (not used)
+     *
      * @return texture region used to render the tile
      */
     @Override
@@ -92,12 +99,19 @@ public enum TileType implements TiledMapTile {
         return null;
     }
 
+    /**
+     * Sets texture region (not used)
+     *
+     * @param textureRegion TextureRegion: used to render the tile
+     */
     @Override
     public void setTextureRegion(TextureRegion textureRegion) {
 
     }
 
     /**
+     * Gets x offset (not used)
+     *
      * @return the amount to offset the x position when rendering the tile
      */
     @Override
@@ -106,9 +120,9 @@ public enum TileType implements TiledMapTile {
     }
 
     /**
-     * Set the amount to offset the x position when rendering the tile
+     * Set the amount to offset the x position when rendering the tile (not used)
      *
-     * @param offsetX
+     * @param offsetX float: X axis offset
      */
     @Override
     public void setOffsetX(float offsetX) {
@@ -116,6 +130,8 @@ public enum TileType implements TiledMapTile {
     }
 
     /**
+     * Gets y offset (not used)
+     *
      * @return the amount to offset the y position when rendering the tile
      */
     @Override
@@ -124,9 +140,9 @@ public enum TileType implements TiledMapTile {
     }
 
     /**
-     * Set the amount to offset the y position when rendering the tile
+     * Set the amount to offset the y position when rendering the tile (not used)
      *
-     * @param offsetY
+     * @param offsetY float: Y axis offset
      */
     @Override
     public void setOffsetY(float offsetY) {
@@ -134,6 +150,8 @@ public enum TileType implements TiledMapTile {
     }
 
     /**
+     * Gets properties (not used)
+     *
      * @return tile's properties set
      */
     @Override
@@ -152,6 +170,7 @@ public enum TileType implements TiledMapTile {
 
     /**
      * Gets name
+     *
      * @return str: Name
      */
     public String getName() {
@@ -160,6 +179,7 @@ public enum TileType implements TiledMapTile {
 
     /**
      * Gets damage
+     *
      * @return float: Damage
      */
     public float getDamage() {
@@ -181,7 +201,7 @@ public enum TileType implements TiledMapTile {
     /**
      * Gets tile type.
      *
-     * @param int id: Tile id
+     * @param id: Tile id
      * @return str: Tile type
      */
     public static TileType getTileTypeByID(int id) {

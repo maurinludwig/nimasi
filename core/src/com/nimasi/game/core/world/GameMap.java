@@ -17,6 +17,10 @@ public abstract class GameMap {
     public Player player;
     private int cloudsUsed = 0;
 
+    /**
+     * Constructor for Game Map
+     * Initializes entities array list and adds the created player
+     */
     GameMap() {
         entities = new ArrayList<>();
         player = new Player(220, 100, this);
@@ -25,9 +29,9 @@ public abstract class GameMap {
 
     /**
      * Rendering game map with given cam
-     * <
      *
      * @param camera: Orthographic Camera
+     * @param batch:  Sprite batch from game
      */
     public void render(OrthographicCamera camera, SpriteBatch batch) {
         camera.position.set(player.getX(), player.getY(), 0);
@@ -91,10 +95,7 @@ public abstract class GameMap {
     /**
      * Checks if rectangle collides with map.
      *
-     * @param x:      X Position
-     * @param y:      Y Position
-     * @param width:  Width of rect
-     * @param height: Height of rect
+     * @param r: Bounding rect to check
      * @return boolean
      */
     public boolean doesRectCollideWithMap(BoundingRect r) {
@@ -125,7 +126,13 @@ public abstract class GameMap {
         return false;
     }
 
-    public boolean willRectCollideWithClouds(BoundingRect r) {
+    /**
+     * Checks if bounding rect collides with clouds.
+     *
+     * @param r: Bounding rect
+     * @return boolean: if collides
+     */
+    private boolean willRectCollideWithClouds(BoundingRect r) {
         return entities
                 .stream()
                 .filter(e -> e.getType().equals(EntityType.CLOUD))
@@ -158,7 +165,7 @@ public abstract class GameMap {
      *
      * @return int: width in pixel
      */
-    public int getPixelWidth() {
+    private int getPixelWidth() {
         return this.getWidth() * TileType.TILE_SIZE;
     }
 
@@ -167,7 +174,7 @@ public abstract class GameMap {
      *
      * @return int: height in pixel
      */
-    public int getPixelHeight() {
+    private int getPixelHeight() {
         return this.getHeight() * TileType.TILE_SIZE;
     }
 

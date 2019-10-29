@@ -116,6 +116,11 @@ public class Player extends Entity {
 
     }
 
+    /**
+     * Converts player coordinates to a string (used for debug)
+     *
+     * @return String: Player coordinates
+     */
     @Override
     public String toString() {
         return String.format("<Player X=%.0f Y=%.0f W=%.0f H=%.0f>", getX(), getY(), getWidth(), getHeight());

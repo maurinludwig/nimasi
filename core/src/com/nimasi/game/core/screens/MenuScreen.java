@@ -38,7 +38,6 @@ public class MenuScreen implements Screen {
      */
     public MenuScreen(NimasiJumper game) {
         this.game = game;
-        //noinspection NonJREEmulationClassesInClientCode
         buttons = List.of(MenuButtonTypes.values());
         logo = new Texture("nimasijumper.png");
         manager = new HighscoreManager();

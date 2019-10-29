@@ -15,10 +15,11 @@ public enum EntityType {
     /**
      * Constructor
      *
-     * @param id:     Entity ID
-     * @param width:  Width from Entity
-     * @param height: Height from Entity
-     * @param weight: Width from Entity
+     * @param id:         Entity ID
+     * @param width:      Width from Entity
+     * @param height:     Height from Entity
+     * @param weight:     Width from Entity
+     * @param collidable: Is collidable
      */
     EntityType(String id, int width, int height, float weight, boolean collidable) {
         this.id = id;

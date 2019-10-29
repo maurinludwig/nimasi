@@ -17,14 +17,13 @@ import com.nimasi.game.core.world.TiledGameMap;
  */
 public class GameScreen implements Screen {
 
-    OrthographicCamera cam;
-    GameMap gameMap;
-    NimasiJumper game;
+    private OrthographicCamera cam;
+    private GameMap gameMap;
+    private NimasiJumper game;
     private HighscoreManager manager;
 
 
-
-    public GameScreen(NimasiJumper game, HighscoreManager manager) {
+    GameScreen(NimasiJumper game, HighscoreManager manager) {
         this.game = game;
         this.manager = manager;
     }

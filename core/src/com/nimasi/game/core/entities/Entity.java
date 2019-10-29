@@ -9,11 +9,11 @@ import com.nimasi.game.core.world.GameMap;
  */
 public abstract class Entity implements BoundingRect {
 
-    protected Vector2 pos;
-    protected EntityType type;
-    protected float velocityY = 0;
-    protected GameMap map;
-    protected boolean grounded = false;
+    Vector2 pos;
+    private EntityType type;
+    float velocityY = 0;
+    GameMap map;
+    boolean grounded = false;
 
     /**
      * Constructor
@@ -23,7 +23,7 @@ public abstract class Entity implements BoundingRect {
      * @param type : Entity Type
      * @param map  :  Game Map
      */
-    public Entity(float x, float y, EntityType type, GameMap map) {
+    Entity(float x, float y, EntityType type, GameMap map) {
         this.pos = new Vector2(x, y);
         this.type = type;
         this.map = map;
@@ -35,52 +35,16 @@ public abstract class Entity implements BoundingRect {
      * @param deltaTime: Time since last game update
      * @param gravity:   Gravity factor
      */
-    public void update(float deltaTime, float gravity) {}
-//    public void update(float deltaTime, float gravity) {
-//        float newY = pos.y;
-//
-//        this.velocityY += gravity * deltaTime * getWeight();
-//        newY += this.velocityY * deltaTime;
-//
-//        boolean collidesWithCloud = map.willRectCollideWithClouds(new BoundingRectImpl(
-//                pos.x,
-//                newY,
-//                getWidth(),
-//                getHeight()
-//        ));
-//
-//        boolean collidesWithMap = map.doesRectCollideWithMap(pos.x, newY, getWidth(), getHeight());
-//
-//        if (collidesWithMap || collidesWithCloud) {
-//            velocityY = 0;
-//            grounded = true;
-//            pos.y = (float) Math.floor(pos.y);
-//        } else {
-//            this.pos.y = newY;
-//            grounded = false;
-//
-//        }
-//    }
-
-    public abstract void render(SpriteBatch batch);
+    public void update(float deltaTime, float gravity) {
+    }
 
     /**
-     * Check if new theoretical position is not colliding. If not colliding set new position.
+     * Renders entities
      *
-     * @param amount: Amount of pixels to move
+     * @param batch: Sprite Batch of game
      */
-//    void moveX(float amount) {
-//        float newX = pos.x + amount;
-//        boolean collidesWithCloud = map.willRectCollideWithClouds(new BoundingRectImpl(
-//                newX,
-//                pos.y,
-//                getWidth(),
-//                getHeight()
-//        ));
-//        if (!map.doesRectCollideWithMap(newX, pos.y, getWidth(), getHeight()) && !collidesWithCloud) {
-//            this.pos.x = newX;
-//        }
-//    }
+    public abstract void render(SpriteBatch batch);
+
 
     /**
      * Gets Postition
@@ -150,15 +114,25 @@ public abstract class Entity implements BoundingRect {
      *
      * @return int: weight
      */
-    public float getWeight() {
+    float getWeight() {
         return type.getWeight();
     }
 
+    /**
+     * Gets boolean if given bounding rect is colliding with a bounding rect.
+     *
+     * @return boolean: collides with bounding rect
+     */
     public boolean isCollidingWithBoundingRect(BoundingRect r) {
         return BoundingRectImpl.doBoundingRectsCollide(this, r);
     }
 
-    public void moveX(float newX) {
+    /**
+     * Checks if new X would collide with something, if it doesn't collides with something, sets new X as x.
+     *
+     * @param newX float: new X axis to check/set
+     */
+    void moveX(float newX) {
 
         if (type.isCollidable() && map.doesRectCollideWithMap(new BoundingRectImpl(newX, getY(), getWidth(), getHeight()))) {
             return;
@@ -167,7 +141,12 @@ public abstract class Entity implements BoundingRect {
         pos.x = newX;
     }
 
-    public void moveY(float newY) {
+    /**
+     * Checks if new Y would collide with something, if it doesn't collides with something, sets new Y as y.
+     *
+     * @param newY float: new Y axis to check/set
+     */
+    void moveY(float newY) {
         if (type.isCollidable() && map.doesRectCollideWithMap(new BoundingRectImpl(getX(), newY, getWidth(), getHeight()))) {
             grounded = true;
             return;
