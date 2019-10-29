@@ -29,11 +29,7 @@ public class HighscoreScreen implements Screen {
     private static final int LOGO_HEIGHT = 100;
     private static final int LOGO_Y = 550;
     private Texture logo;
-    private static GlyphLayout glyphLayoutName;
-    private static GlyphLayout glyphLayoutScore;
-    private static GlyphLayout glyphLayoutTime;
     private BitmapFont font = new BitmapFont(Gdx.files.internal("NimasiFont.fnt"));
-    private GlyphLayout glyphLayoutNumber;
 
 
     public HighscoreScreen(NimasiJumper game, HighscoreManager manager) {
@@ -86,10 +82,10 @@ public class HighscoreScreen implements Screen {
             }
 
         });
-        glyphLayoutName = new GlyphLayout();
-        glyphLayoutTime = new GlyphLayout();
-        glyphLayoutScore = new GlyphLayout();
-        glyphLayoutNumber = new GlyphLayout();
+        GlyphLayout glyphLayoutName = new GlyphLayout();
+        GlyphLayout glyphLayoutTime = new GlyphLayout();
+        GlyphLayout glyphLayoutScore = new GlyphLayout();
+        GlyphLayout glyphLayoutNumber = new GlyphLayout();
 
         glyphLayoutTime.setText(font, "SCORE", font.getColor(), 0, Align.right, false);
 

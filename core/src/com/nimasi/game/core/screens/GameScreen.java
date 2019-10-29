@@ -21,6 +21,7 @@ public class GameScreen implements Screen {
     private GameMap gameMap;
     private NimasiJumper game;
     private HighscoreManager manager;
+    private int score;
 
 
     GameScreen(NimasiJumper game, HighscoreManager manager) {
@@ -36,7 +37,7 @@ public class GameScreen implements Screen {
         cam = new OrthographicCamera();
         cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.update();
-
+        score = 0;
         gameMap = new TiledGameMap();
     }
 
@@ -50,6 +51,12 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        int newScore = (int) Math.floor(gameMap.player.getY()) - 100;
+
+        if (newScore > score) {
+            score = newScore;
+        }
+
         if (gameMap.doesRectCollideWithMap(new BoundingRectImpl(
                 gameMap.player.getX(),
                 gameMap.player.getY() - 5,
@@ -62,7 +69,7 @@ public class GameScreen implements Screen {
                 cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 cam.update();
                 manager.saveHighscore(new Highscore((int) gameMap.player.getY(), "Maurin", 60));
-                game.setScreen(new MenuScreen(game));
+                game.setScreen(new DeathScreen(game, score));
             }
         }
 
