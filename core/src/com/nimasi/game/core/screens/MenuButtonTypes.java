@@ -4,39 +4,38 @@ import com.badlogic.gdx.graphics.Texture;
 
 import static com.nimasi.game.core.NimasiJumper.WIDTH;
 
-
 /**
  * Types of GameButtons
  */
 public enum MenuButtonTypes {
     PLAY(
-            WIDTH / 2 - 150 / 2, // Calculating the middle of the screen minus offset
+            WIDTH / 2 - Constants.PLAY_WIDTH / 2, // Calculating the middle of the screen minus offset
             400,
-            150,
+            Constants.PLAY_WIDTH,
             50,
             new Texture("play_highlighted.png"),
             new Texture("play.png")
     ),
-    HIGH_SCORE(
-            WIDTH / 2 - 250 / 2, // Calculating the middle of the screen minus offset
+    HIGHSCORE(
+            WIDTH / 2 - Constants.HIGHSCORE_WIDTH / 2, // Calculating the middle of the screen minus offset
             300,
-            250,
+            Constants.HIGHSCORE_WIDTH,
             50,
             new Texture("highscore_highlighted.png"),
             new Texture("highscore.png")
     ),
     SETTINGS(
-            WIDTH / 2 - 250 / 2, // Calculating the middle of the screen minus offset
+            WIDTH / 2 - Constants.SETTINGS_WIDTH / 2, // Calculating the middle of the screen minus offset
             200,
-            250,
+            Constants.SETTINGS_WIDTH,
             50,
             new Texture("settings_highlighted.png"),
             new Texture("settings.png")
     ),
     QUIT(
-            WIDTH / 2 - 100 / 2, // Calculating the middle of the screen minus offset
+            WIDTH / 2 - Constants.QUIT_WIDTH / 2, // Calculating the middle of the screen minus offset
             100,
-            100,
+            Constants.QUIT_WIDTH,
             50,
             new Texture("quit_highlighted.png"),
             new Texture("quit.png")
@@ -48,6 +47,13 @@ public enum MenuButtonTypes {
     private Integer height;
     Texture activeTexture;
     Texture inactiveTexture;
+
+    private static class Constants {
+        static final int PLAY_WIDTH = 150;
+        static final int HIGHSCORE_WIDTH = 250;
+        static final int SETTINGS_WIDTH = 250;
+        static final int QUIT_WIDTH = 100;
+    }
 
     /**
      * GameButton-types Constructor
