@@ -22,7 +22,6 @@ public class MenuScreen implements Screen {
     private static final int LOGO_WIDTH = 400;
     private static final int LOGO_HEIGHT = 100;
     private static final int LOGO_Y = 550;
-    private static final Integer PLAY_WIDTH = 150;
 
 
     private NimasiJumper game;
