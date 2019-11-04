@@ -3,11 +3,11 @@ package com.nimasi.game.core.world;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.nimasi.game.core.entities.*;
 
 import java.util.ArrayList;
-
 /**
  * Nimasi Game Map
  */
@@ -16,6 +16,9 @@ public abstract class GameMap {
     private ArrayList<Entity> entities;
     public Player player;
     private int cloudsUsed = 0;
+    private BitmapFont font = new BitmapFont(Gdx.files.internal("NimasiFont.fnt"));
+    public int score;
+
 
     /**
      * Constructor for Game Map
@@ -25,6 +28,7 @@ public abstract class GameMap {
         entities = new ArrayList<>();
         player = new Player(220, 100, this);
         entities.add(player);
+        this.score = getScore();
     }
 
     /**
@@ -36,6 +40,7 @@ public abstract class GameMap {
     public void render(OrthographicCamera camera, SpriteBatch batch) {
         camera.position.set(player.getX(), player.getY(), 0);
         camera.update();
+
         for (Entity entity : entities) {
             entity.render(batch);
         }
@@ -55,6 +60,31 @@ public abstract class GameMap {
     }
 
     /**
+     * Gets amount of remaining clouds.
+     *
+     * @return int: Amount of remaining clouds.
+     */
+    public int getClouds() {
+        switch (cloudsUsed) {
+            case 3: {
+                return 0;
+            }
+            case 2: {
+                return 1;
+            }
+            case 1: {
+                return 2;
+            }
+            case 0: {
+                return 3;
+            }
+            default: {
+                return Integer.parseInt(null);
+            }
+        }
+    }
+
+    /**
      * Updates game map
      *
      * @param delta: Changes
@@ -63,6 +93,20 @@ public abstract class GameMap {
         for (Entity entity : entities) {
             entity.update(delta, -15f);
         }
+    }
+
+    /**
+     * Gets player score. Only sets new score if current score is higher than old score.
+     *
+     * @return int: Score
+     */
+    public int getScore() {
+        int newScore = (int) Math.floor(player.getY()) - 100;
+
+        if (newScore > score) {
+            score = newScore;
+        }
+        return score;
     }
 
     /**

@@ -1,9 +1,15 @@
 package com.nimasi.game.core.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.nimasi.game.core.NimasiJumper;
 import com.nimasi.game.core.entities.BoundingRectImpl;
 import com.nimasi.game.core.highscore.Highscore;
@@ -11,6 +17,11 @@ import com.nimasi.game.core.highscore.HighscoreManager;
 import com.nimasi.game.core.world.GameMap;
 import com.nimasi.game.core.world.TileType;
 import com.nimasi.game.core.world.TiledGameMap;
+
+import java.util.List;
+
+import static com.nimasi.game.core.NimasiJumper.HEIGHT;
+import static com.nimasi.game.core.NimasiJumper.WIDTH;
 
 /**
  * Game Screen Class
@@ -21,8 +32,8 @@ public class GameScreen implements Screen {
     private GameMap gameMap;
     private NimasiJumper game;
     private HighscoreManager manager;
-    private int score;
-
+    private BitmapFont font = new BitmapFont(Gdx.files.internal("NimasiFont.fnt"));
+    private SpriteBatch overlayBatch;
 
     GameScreen(NimasiJumper game, HighscoreManager manager) {
         this.game = game;
@@ -37,8 +48,8 @@ public class GameScreen implements Screen {
         cam = new OrthographicCamera();
         cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.update();
-        score = 0;
         gameMap = new TiledGameMap();
+        overlayBatch = new SpriteBatch();
     }
 
     /**
@@ -51,11 +62,6 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        int newScore = (int) Math.floor(gameMap.player.getY()) - 100;
-
-        if (newScore > score) {
-            score = newScore;
-        }
 
         if (gameMap.doesRectCollideWithMap(new BoundingRectImpl(
                 gameMap.player.getX(),
@@ -68,15 +74,33 @@ public class GameScreen implements Screen {
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
                 cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                 cam.update();
-                manager.saveHighscore(new Highscore((int) gameMap.player.getY(), "Maurin", 60));
-                game.setScreen(new DeathScreen(game, score));
+                manager.saveHighscore(new Highscore((int) gameMap.score, "Maurin", 60));
+                game.setScreen(new DeathScreen(game, gameMap.getScore()));
             }
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+
         }
 
         gameMap.update(Gdx.graphics.getDeltaTime());
         gameMap.render(cam, game.batch);
 
+        // Overlay Layer Clouds
+        overlayBatch.begin();
+        overlayBatch.draw(new Texture("cloud.png"),WIDTH - 50, HEIGHT - 50 , 50, 50);
+        GlyphLayout glyphLayoutClouds = new GlyphLayout();
+        glyphLayoutClouds.setText(font, gameMap.getClouds() + "x", font.getColor(), 0, Align.center, false);
+        font.draw(overlayBatch, glyphLayoutClouds, WIDTH - 25, HEIGHT - 25 );
+
+        // Overlay Layer Clouds
+        GlyphLayout glyphLayoutScore = new GlyphLayout();
+        glyphLayoutClouds.setText(font, "SCORE: " + gameMap.getScore(), font.getColor(), 0, Align.center, false);
+        font.draw(overlayBatch, glyphLayoutClouds, WIDTH / 2, HEIGHT - 25);
+
+        overlayBatch.end();
     }
+
 
     /**
      * Resizes screen

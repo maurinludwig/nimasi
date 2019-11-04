@@ -2,13 +2,10 @@ package com.nimasi.game.core.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.nimasi.game.core.NimasiJumper;
 import com.nimasi.game.core.highscore.Highscore;
@@ -19,6 +16,9 @@ import java.util.List;
 import static com.nimasi.game.core.NimasiJumper.HEIGHT;
 import static com.nimasi.game.core.NimasiJumper.WIDTH;
 
+/**
+ * Highscore Menu Screen
+ */
 public class HighscoreScreen implements Screen {
 
     private HighscoreManager manager;
@@ -31,7 +31,12 @@ public class HighscoreScreen implements Screen {
     private Texture logo;
     private BitmapFont font = new BitmapFont(Gdx.files.internal("NimasiFont.fnt"));
 
-
+    /**
+     * Constructor of highscore screen
+     *
+     * @param game: NimasiJumper main class
+     * @param manager: Highscore manager
+     */
     public HighscoreScreen(NimasiJumper game, HighscoreManager manager) {
         this.game = game;
         this.manager = manager;
@@ -99,7 +104,7 @@ public class HighscoreScreen implements Screen {
         for (int i = 0; i < highscores.size() && i < 10; i++) {
             String score = String.format("%s", highscores.get(i).getScore());
             String time = String.format("%s", highscores.get(i).getTime());
-            String currentNumber = String.format("%s", i +1);
+            String currentNumber = String.format("%s", i + 1);
 
             glyphLayoutNumber.setText(font, currentNumber);
             glyphLayoutName.setText(font, highscores.get(i).getName());
