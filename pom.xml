@@ -81,9 +81,18 @@
 				<module>desktop</module>
 			</modules>
 		</profile>
+
+		<profile>
+			<id>all</id>
+			<modules>
+				<module>desktop</module>
+				<module>core</module>
+			</modules>
+		</profile>
 	</profiles>
 
 	<modules>
 		<module>core</module>
+		<module>desktop</module>
 	</modules>
 </project>
