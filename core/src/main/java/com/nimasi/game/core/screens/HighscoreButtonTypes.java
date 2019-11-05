@@ -13,8 +13,8 @@ public enum HighscoreButtonTypes {
             700 - 35,
             75,
             35,
-            new Texture("play_highlighted.png"),
-            new Texture("play.png")
+            new Texture("back_highlighted.png"),
+            new Texture("back.png")
     );
 
     private Integer positionX;

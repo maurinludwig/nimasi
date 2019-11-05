@@ -13,16 +13,16 @@ public enum DeathButtonTypes {
             400,
             Constants.PLAY_AGAIN_WIDTH,
             50,
-            new Texture("play_highlighted.png"),
-            new Texture("play.png")
+            new Texture("play_again_highlighted.png"),
+            new Texture("play_again.png")
     ),
     MENU(
             WIDTH / 2 - Constants.MENU_WIDTH / 2, // Calculating the middle of the screen minus offset
             300,
             Constants.MENU_WIDTH,
             50,
-            new Texture("highscore_highlighted.png"),
-            new Texture("highscore.png")
+            new Texture("menu_highlighted.png"),
+            new Texture("menu.png")
     );
 
     private Integer positionX;

@@ -13,56 +13,56 @@ public enum SettingsButtonTypes {
             400,
             Constants.MUSIC_WIDTH,
             50,
-            new Texture("play_highlighted.png"),
-            new Texture("play.png")
+            new Texture("music_highlighted.png"),
+            new Texture("music.png")
     ),
     MUSIC_LOUDER(
             WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
             300,
             Constants.ARROW_WIDTH,
             50,
-            new Texture("highscore_highlighted.png"),
-            new Texture("highscore.png")
+            new Texture("arrow_louder_highlighted.png"),
+            new Texture("arrow_louder.png")
     ),
     MUSIC_QUIETER(
             WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
             200,
             Constants.ARROW_WIDTH,
             50,
-            new Texture("settings_highlighted.png"),
-            new Texture("settings.png")
+            new Texture("arrow_quieter_highlighted.png"),
+            new Texture("arrow_quieter.png")
     ),
     SOUNDS(
             WIDTH / 2 - Constants.SOUNDS_WIDTH / 2, // Calculating the middle of the screen minus offset
             100,
             Constants.SOUNDS_WIDTH,
             50,
-            new Texture("quit_highlighted.png"),
-            new Texture("quit.png")
+            new Texture("sounds_highlighted.png"),
+            new Texture("sounds.png")
     ),
     SOUNDS_LOUDER(
             WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
             100,
             Constants.ARROW_WIDTH,
             50,
-            new Texture("quit_highlighted.png"),
-            new Texture("quit.png")
+            new Texture("arrow_louder_highlighted.png"),
+            new Texture("arrow_louder.png")
     ),
     SOUNDS_QUIETER(
             WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
             100,
             Constants.ARROW_WIDTH,
             50,
-            new Texture("quit_highlighted.png"),
-            new Texture("quit.png")
+            new Texture("arrow_quieter_highlighted.png"),
+            new Texture("arrow_quieter.png")
     ),
     UPDATE_NAME(
             WIDTH / 2 - Constants.UPDATE_NAME_WIDTH / 2, // Calculating the middle of the screen minus offset
             100,
             Constants.UPDATE_NAME_WIDTH,
             50,
-            new Texture("quit_highlighted.png"),
-            new Texture("quit.png")
+            new Texture("update_name_highlighted.png"),
+            new Texture("update_name.png")
     );
 
     private Integer positionX;
