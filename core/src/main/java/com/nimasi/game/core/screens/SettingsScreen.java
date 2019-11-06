@@ -2,13 +2,16 @@ package com.nimasi.game.core.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.nimasi.game.core.NimasiJumper;
+import com.nimasi.game.core.config.Config;
+import com.nimasi.game.core.config.ConfigManager;
 import com.nimasi.game.core.highscore.HighscoreManager;
 
 import java.util.List;
-import java.util.Set;
 
 import static com.nimasi.game.core.NimasiJumper.HEIGHT;
 import static com.nimasi.game.core.NimasiJumper.WIDTH;
@@ -23,11 +26,20 @@ public class SettingsScreen implements Screen {
     private static final int LOGO_HEIGHT = 100;
     private static final int LOGO_Y = 550;
 
+    private float lastVolume;
 
     private NimasiJumper game;
-    private HighscoreManager manager;
+
+    private SpriteBatch sliderBatch;
 
     private Texture logo;
+
+    private Texture blank;
+    private ConfigManager configManager = new ConfigManager();
+
+
+
+
 
     /**
      * Main menu constructor
@@ -38,7 +50,8 @@ public class SettingsScreen implements Screen {
         this.game = game;
         buttons = List.of(SettingsButtonTypes.values());
         logo = new Texture("nimasijumper.png");
-        manager = new HighscoreManager();
+        blank = new Texture("blank.png");
+        sliderBatch = new SpriteBatch();
     }
 
     /**
@@ -59,6 +72,9 @@ public class SettingsScreen implements Screen {
         Gdx.gl.glClearColor(0.2f, 0.2f, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        Config currentConfig = configManager.readConfig();
+
+
         game.batch.begin();
 
         game.batch.draw(logo, WIDTH / 2 - LOGO_WIDTH / 2 - 8, LOGO_Y, LOGO_WIDTH, LOGO_HEIGHT);
@@ -73,7 +89,58 @@ public class SettingsScreen implements Screen {
             );
 
             if (isButtonActive(button) && Gdx.input.justTouched()) {
+                float currentMusicVolume = game.backgroundMusic.getVolume();
+//                float currentSoundVolume = game.sound.getVolume();
                 switch (button) {
+                    case MUSIC: {
+                        if (currentMusicVolume > 0) {
+                            lastVolume = currentMusicVolume;
+                            game.backgroundMusic.setVolume(0);
+                            configManager.saveConfig(new Config(currentConfig.getUsername(), 0, currentConfig.getSoundVol()));
+                        } else {
+                            game.backgroundMusic.setVolume(lastVolume);
+                            configManager.saveConfig(new Config(currentConfig.getUsername(), lastVolume, currentConfig.getSoundVol()));
+                        }
+                        break;
+                    }
+                    case MUSIC_LOUDER: {
+                        if (currentMusicVolume < 1) {
+                            game.backgroundMusic.setVolume(currentMusicVolume + 0.1f);
+                            configManager.saveConfig(new Config(currentConfig.getUsername(), currentMusicVolume + 0.1f, currentConfig.getSoundVol()));
+                        }
+                        break;
+                    }
+                    case MUSIC_QUIETER: {
+                        if (currentMusicVolume > 0) {
+                            game.backgroundMusic.setVolume(currentMusicVolume - 0.1f);
+                            configManager.saveConfig(new Config(currentConfig.getUsername(), currentMusicVolume - 0.1f, currentConfig.getSoundVol()));
+                        }
+                        break;
+                    }
+                    case SOUNDS_LOUDER: {
+//                        if (currentSoundVolume < 1) {
+//                            game.sounds.setVolume(currentSoundVolume + 0.1f);
+//                        }
+                        System.out.println("PLUS");
+                        break;
+                    }
+                    case SOUNDS_QUIETER: {
+//                        if (currentSoundVolume > 0) {
+//                            game.sounds.setVolume(currentSoundVolume - 0.1f);
+//                        }
+                        System.out.println("MINUS");
+                        break;
+                    }
+                    case UPDATE_NAME: {
+                        TextInputListener listener = new TextInputListener();
+                        Gdx.input.getTextInput(listener, "Set a new Username", currentConfig.getUsername(), "");
+                        break;
+                    }
+                    case BACK: {
+                        this.dispose();
+                        game.setScreen(new MenuScreen(game));
+                        break;
+                    }
                     default:
                         throw new IllegalStateException("Button not found: " + button);
                 }
@@ -81,8 +148,16 @@ public class SettingsScreen implements Screen {
 
         });
 
-        game.batch.end();
+        float musicVolume = game.backgroundMusic.getVolume();
 
+        sliderBatch.begin();
+        sliderBatch.setColor(Color.BLACK);
+        sliderBatch.draw(blank, WIDTH / 4 - 20/2, 395, WIDTH / 2 + 20, 20);
+        sliderBatch.setColor(Color.GRAY);
+        sliderBatch.draw(blank, WIDTH / 4, 400, WIDTH / 2 * musicVolume, 10);
+        sliderBatch.end();
+
+        game.batch.end();
     }
 
     /**
@@ -140,4 +215,5 @@ public class SettingsScreen implements Screen {
     public void dispose() {
 
     }
+
 }

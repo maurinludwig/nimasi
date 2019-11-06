@@ -80,7 +80,7 @@ public class Player extends Entity {
             velocityY = 0;
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.J)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.J) && !jetpack) {
             System.out.println("JETPACK MODE ON");
             jetpack = true;
         } else if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.J) && jetpack) {

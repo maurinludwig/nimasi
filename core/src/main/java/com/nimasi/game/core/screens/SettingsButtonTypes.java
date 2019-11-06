@@ -10,51 +10,19 @@ import static com.nimasi.game.core.NimasiJumper.WIDTH;
 public enum SettingsButtonTypes {
     MUSIC(
             WIDTH / 2 - Constants.MUSIC_WIDTH / 2, // Calculating the middle of the screen minus offset
-            400,
+            450,
             Constants.MUSIC_WIDTH,
             50,
             new Texture("music_highlighted.png"),
             new Texture("music.png")
     ),
-    MUSIC_LOUDER(
-            WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
-            300,
-            Constants.ARROW_WIDTH,
-            50,
-            new Texture("arrow_louder_highlighted.png"),
-            new Texture("arrow_louder.png")
-    ),
-    MUSIC_QUIETER(
-            WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
-            200,
-            Constants.ARROW_WIDTH,
-            50,
-            new Texture("arrow_quieter_highlighted.png"),
-            new Texture("arrow_quieter.png")
-    ),
     SOUNDS(
             WIDTH / 2 - Constants.SOUNDS_WIDTH / 2, // Calculating the middle of the screen minus offset
-            100,
+            300,
             Constants.SOUNDS_WIDTH,
             50,
             new Texture("sounds_highlighted.png"),
             new Texture("sounds.png")
-    ),
-    SOUNDS_LOUDER(
-            WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
-            100,
-            Constants.ARROW_WIDTH,
-            50,
-            new Texture("arrow_louder_highlighted.png"),
-            new Texture("arrow_louder.png")
-    ),
-    SOUNDS_QUIETER(
-            WIDTH / 2 - Constants.ARROW_WIDTH / 2, // Calculating the middle of the screen minus offset
-            100,
-            Constants.ARROW_WIDTH,
-            50,
-            new Texture("arrow_quieter_highlighted.png"),
-            new Texture("arrow_quieter.png")
     ),
     UPDATE_NAME(
             WIDTH / 2 - Constants.UPDATE_NAME_WIDTH / 2, // Calculating the middle of the screen minus offset
@@ -63,6 +31,46 @@ public enum SettingsButtonTypes {
             50,
             new Texture("update_name_highlighted.png"),
             new Texture("update_name.png")
+    ),
+    MUSIC_LOUDER(
+            WIDTH * 3 / 4 + Constants.ARROW_WIDTH / 2, // Calculating the left part of the slider minus offset
+            380,
+            Constants.ARROW_WIDTH,
+            50,
+            new Texture("arrow_louder_highlighted.png"),
+            new Texture("arrow_louder.png")
+    ),
+    MUSIC_QUIETER(
+            WIDTH / 4 - Constants.ARROW_WIDTH / 2 - 50, // Calculating the left part of the slider minus offset
+            380,
+            Constants.ARROW_WIDTH,
+            50,
+            new Texture("arrow_quieter_highlighted.png"),
+            new Texture("arrow_quieter.png")
+    ),
+    SOUNDS_LOUDER(
+            WIDTH * 3 / 4 + Constants.ARROW_WIDTH / 2, // Calculating the left part of the slider minus offset
+            200,
+            Constants.ARROW_WIDTH,
+            50,
+            new Texture("arrow_louder_highlighted.png"),
+            new Texture("arrow_louder.png")
+    ),
+    SOUNDS_QUIETER(
+            WIDTH / 4 - Constants.ARROW_WIDTH / 2 - 50, // Calculating the left part of the slider minus offset
+            200,
+            Constants.ARROW_WIDTH,
+            50,
+            new Texture("arrow_quieter_highlighted.png"),
+            new Texture("arrow_quieter.png")
+    ),
+    BACK(
+            20,
+            700 - 35,
+            75,
+            35,
+            new Texture("back_highlighted.png"),
+            new Texture("back.png")
     );
 
     private Integer positionX;
