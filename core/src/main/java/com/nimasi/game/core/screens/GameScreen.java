@@ -79,21 +79,17 @@ public class GameScreen implements Screen {
             }
         }
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-
-        }
-
         gameMap.update(Gdx.graphics.getDeltaTime());
         gameMap.render(cam, game.batch);
 
-        // Overlay Layer Clouds
+        // Overlay Layer Clouds -> Shows remaining clouds ingame
         overlayBatch.begin();
         overlayBatch.draw(new Texture("cloud.png"),WIDTH - 50, HEIGHT - 50 , 50, 50);
         GlyphLayout glyphLayoutClouds = new GlyphLayout();
         glyphLayoutClouds.setText(font, gameMap.getClouds() + "x", font.getColor(), 0, Align.center, false);
         font.draw(overlayBatch, glyphLayoutClouds, WIDTH - 25, HEIGHT - 25 );
 
-        // Overlay Layer Clouds
+        // Overlay Layer Score -> Shows current score ingame
         GlyphLayout glyphLayoutScore = new GlyphLayout();
         glyphLayoutClouds.setText(font, "SCORE: " + gameMap.getScore(), font.getColor(), 0, Align.center, false);
         font.draw(overlayBatch, glyphLayoutClouds, WIDTH / 2, HEIGHT - 25);
