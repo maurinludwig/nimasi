@@ -1,39 +1,76 @@
 package com.nimasi.game.core.highscore;
 
+/**
+ * Defines Highscore Object
+ */
 public class Highscore implements Comparable<Highscore> {
     private int score;
     private String name;
     private long time;
 
-    public Highscore() {
-    }
-
+    /**
+     * Constructor
+     *
+     * @param score: Highscore
+     * @param name: Username
+     * @param time: Time it took for the run
+     */
     public Highscore(int score, String name, long time) {
         this.score = score;
         this.name = name;
         this.time = time;
     }
 
+    /**
+     * Gets score
+     *
+     * @return int: Highscore
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Sets score
+     *
+     * @param score int: Highscore
+     */
     public void setScore(int score) {
         this.score = score;
     }
 
+    /**
+     * Gets name
+     *
+     * @return String: Username
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name
+     *
+     * @param name String: Username
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets time
+     *
+     * @return long: Time it took for the run
+     */
     public long getTime() {
         return time;
     }
 
+    /**
+     * Sets time
+     *
+     * @param time long: Time it took for the run
+     */
     public void setTime(long time) {
         this.time = time;
     }
